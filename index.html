@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenFocus</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>ZenFocus</h1>
+    
+    <div class="time-inputs">
+      <div class="input-group">
+        <label for="hours-input">Hours</label>
+        <input type="number" id="hours-input" placeholder="0" min="0" value="0" />
+      </div>
+      <div class="input-group">
+        <label for="minutes-input">Minutes</label>
+        <input type="number" id="minutes-input" placeholder="25" min="1" value="25" />
+      </div>
+    </div>
+    <div class="preset-buttons">
+      <button class="preset-btn" data-hours="0" data-minutes="25">25 min</button>
+      <button class="preset-btn" data-hours="0" data-minutes="45">45 min</button>
+      <button class="preset-btn" data-hours="1" data-minutes="0">1 hour</button>
+      <button class="preset-btn" data-hours="2" data-minutes="0">2 hours</button>
+    </div>
+    <button id="start-btn">Start Focus</button>
+  </div>
+
+  <div id="focus-screen" class="hidden">
+    <div class="brightness-overlay"></div>
+    
+    <!-- Minimal Circle Timer -->
+    <div class="circle-timer-container">
+      <div class="enso-circle">
+        <svg class="progress-ring" width="600" height="600">
+          <circle
+            class="progress-ring-bg"
+            stroke="#2d5016"
+            stroke-width="12"
+            fill="transparent"
+            r="270"
+            cx="300"
+            cy="300"
+          />
+          <circle
+            class="progress-ring-fill"
+            stroke="#81c784"
+            stroke-width="12"
+            fill="transparent"
+            r="270"
+            cx="300"
+            cy="300"
+            stroke-dasharray="1696"
+            stroke-dashoffset="1696"
+          />
+        </svg>
+        <div class="timer-center">
+          <div id="timer">25:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="completion-screen" class="hidden">
+    <h2>Great job!</h2>
+    <p>You've completed your focus session!</p>
+    <button id="restart-btn">Start New Session</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

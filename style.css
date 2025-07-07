@@ -1,0 +1,347 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e8f5e8 0%, #d4edda 100%);
+  color: #2d5016;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.container h1 {
+  margin-bottom: 1.5rem;
+  color: #2d5016;
+  font-size: 2.5rem;
+  font-weight: 300;
+}
+
+.time-inputs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  color: #2d5016;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input[type="number"] {
+  padding: 12px;
+  font-size: 1.1rem;
+  width: 80px;
+  border: 2px solid #c8e6c9;
+  border-radius: 8px;
+  text-align: center;
+  transition: border-color 0.3s ease;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #81c784;
+  box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.1);
+}
+
+.preset-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background: rgba(200, 230, 201, 0.4);
+  color: #2d5016;
+  border: 2px solid rgba(129, 199, 132, 0.4);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background: rgba(200, 230, 201, 0.6);
+  border-color: #81c784;
+  transform: translateY(-1px);
+}
+
+.preset-btn.active {
+  background: #81c784;
+  color: white;
+  border-color: #81c784;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #81c784 0%, #66bb6a 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(129, 199, 132, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Focus Screen - Minimal Circle Timer */
+#focus-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #000000 0%, #0d2a0d 25%, #1a3d1a 50%, #275027 75%, #336633 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2d5016;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.brightness-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* Circle Timer Container */
+.circle-timer-container {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.enso-circle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: enso-float 8s ease-in-out infinite;
+}
+
+@keyframes enso-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.02);
+  }
+}
+
+/* Progress Ring */
+.progress-ring {
+  transform: rotate(-90deg);
+  filter: drop-shadow(0 0 20px rgba(129, 199, 132, 0.3));
+  width: 600px;
+  height: 600px;
+}
+
+.progress-ring-bg {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.progress-ring-fill {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease;
+  filter: drop-shadow(0 0 10px rgba(129, 199, 132, 0.5));
+}
+
+/* Timer Center */
+.timer-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+
+#timer {
+  font-size: 6rem;
+  font-weight: 200;
+  font-family: 'Courier New', monospace;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  margin: 0;
+  letter-spacing: 2px;
+  animation: timer-pulse 3s ease-in-out infinite;
+}
+
+@keyframes timer-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Fade Out Animation */
+#focus-screen.fade-out {
+  animation: fade-out-timer 2s ease-out forwards;
+}
+
+@keyframes fade-out-timer {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+#completion-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #2d5016;
+  text-align: center;
+}
+
+#completion-screen h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  color: #2d5016;
+}
+
+#completion-screen p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  color: #2d5016;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Fullscreen styles */
+#focus-screen.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+    margin: 1rem;
+    max-width: 95%;
+  }
+  
+  .time-inputs {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .preset-buttons {
+    gap: 0.25rem;
+  }
+  
+  .preset-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  #timer {
+    font-size: 4rem;
+    letter-spacing: 1px;
+  }
+  
+  .progress-ring {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .progress-ring circle {
+    r: 180;
+    cx: 200;
+    cy: 200;
+    stroke-width: 8;
+  }
+}
+
+/* Animation for focus mode entry */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#focus-screen, #completion-screen {
+  animation: fadeInUp 0.5s ease-out;
+}
